@@ -41,7 +41,7 @@
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                        <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
@@ -50,21 +50,21 @@
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <label for="first-class">First Class ($150)</label>
+                    <input id="first-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p>+ -</p>
+                    <p><span id="increase-first">+</span> <span id="decrease-first">-</span></p>
                 </div>
             </div>
-            
+
             <div class="input-group f-class">
                 <div>
-                    <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <label for="economy-class">Economy ($100)</label>
+                    <input id="economy-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <p><span id="increase-economy">+</span> <span id="decrease-economy">-</span></p>
                 </div>
             </div>
             <div class="calculations">
@@ -73,7 +73,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$ <span id="subtotal">0</span></p>
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$ <span id="vat">0</span></p>
                     </div>
                 </div>
                 <hr>
@@ -91,7 +91,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$ <span id="total">0</span></p>
                     </div>
                 </div>
             </div>
@@ -100,11 +100,65 @@
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
         </div>
-    </section>
+        </section>
 
-    <!--Thank You-->
+        <script>
+
+            document.getElementById("increase-first").addEventListener("click", () => {
+
+                const firstClassTicket = document.getElementById("first-class");
+                firstClassTicket.value++;
+                calculate();
+            })
+
+
+            document.getElementById("decrease-first").addEventListener("click", () => {
+
+                const firstClassTicket = document.getElementById("first-class");
+                firstClassTicket.value = firstClassTicket.value > 0 ? firstClassTicket.value - 1 : 0;
+                calculate();
+            })
+
+
+            document.getElementById("increase-economy").addEventListener("click", () => {
+
+                const economyClassTicket = document.getElementById("economy-class");
+                economyClassTicket.value++;
+                calculate();
+            })
+
+            document.getElementById("decrease-economy").addEventListener("click", () => {
+
+                const economyClassTicket = document.getElementById("economy-class");
+                economyClassTicket.value = economyClassTicket.value > 0 ? economyClassTicket.value - 1 : 0;
+                calculate();
+            })
+
+
+            function calculate() {
+
+                const firstClassQty = document.getElementById("first-class").value;
+                const economyClassQty = document.getElementById("economy-class").value;
+
+                const subtotal = (firstClassQty * 150) + (economyClassQty * 100);
+                const vat = (subtotal / 100) * 10;
+                const total = subtotal + vat;
+
+                document.getElementById("subtotal").innerText = subtotal;
+                document.getElementById("vat").innerText = vat;
+                document.getElementById("total").innerText = total;
+            }
+
+            calculate();
+
+
+
+
+        </script>
 </body>
 
 </html>
