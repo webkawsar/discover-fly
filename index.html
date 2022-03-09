@@ -54,7 +54,10 @@
                     <input id="first-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p><button id="increase-first">+</button> <button id="decrease-first">-</button></p>
+                    <p>
+                        <button id="increase-first" onclick="isIncrease(true, 'first-class')">+</button>
+                        <button id="decrease-first" onclick="isIncrease(false, 'first-class')">-</button>
+                    </p>
                 </div>
             </div>
 
@@ -64,7 +67,10 @@
                     <input id="economy-class" class="inp-style inp-width" type="number" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p><button id="increase-economy">+</button> <button id="decrease-economy">-</button></p>
+                    <p>
+                        <button id="increase-economy" onclick=" isIncrease(true, 'economy-class')">+</button>
+                        <button id="decrease-economy" onclick="isIncrease(false, 'economy-class')">-</button>
+                    </p>
                 </div>
             </div>
             <div class="calculations">
@@ -108,36 +114,12 @@
 
         <script>
 
-            document.getElementById("increase-first").addEventListener("click", () => {
-
-                isIncrease(true, "first-class");
-            })
-
-
-            document.getElementById("decrease-first").addEventListener("click", () => {
-
-                isIncrease(false, "first-class");
-            })
-
-
-            document.getElementById("increase-economy").addEventListener("click", () => {
-
-                isIncrease(true, "economy-class");
-            })
-
-            document.getElementById("decrease-economy").addEventListener("click", () => {
-
-                isIncrease(false, "economy-class");
-            })
-
-
             function isIncrease(increase, id) {
 
                 const ticket = document.getElementById(id);
                 ticket.value = increase ? parseInt(ticket.value) + 1 : ticket.value > 0 ? ticket.value - 1 : 0;
                 calculate();
             }
-
 
             function calculate() {
 
@@ -152,11 +134,7 @@
                 document.getElementById("vat").innerText = vat;
                 document.getElementById("total").innerText = total;
             }
-
             calculate();
-
-
-
 
         </script>
 </body>
