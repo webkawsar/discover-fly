@@ -28,24 +28,24 @@
 
     <!--Booking Section-->
     <main class="main-content container">
-        <div class="booking-form">
+        <div id="booking-area" class="booking-form">
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                <input id="departure" class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                <input id="arrival" class="inp-style" type="text" name="" placeholder="New York, United States">
             </div>
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                        <input class="inp-style" type="date" name="">
+                        <input id="departure-date" class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                    <input id="return-date" class="inp-style" type="date" name="">
                 </div>
             </div>
             <div class="input-group f-class">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="confirm" class="btn-style">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -110,33 +110,58 @@
                 veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
                 voluptatibus quam</p>
         </div>
-        </section>
 
-        <script>
+        <div id="thank-you" style="display: none;margin-top: 30px;">
+            <img src="./images/thank-you.webp" alt="">
+        </div>
+    </main>
+    <script>
 
-            function isIncrease(increase, id) {
+        function isIncrease(increase, id) {
 
-                const ticket = document.getElementById(id);
-                ticket.value = increase ? parseInt(ticket.value) + 1 : ticket.value > 0 ? ticket.value - 1 : 0;
-                calculate();
-            }
-
-            function calculate() {
-
-                const firstClassQty = document.getElementById("first-class").value;
-                const economyClassQty = document.getElementById("economy-class").value;
-
-                const subtotal = (firstClassQty * 150) + (economyClassQty * 100);
-                const vat = (subtotal / 100) * 10;
-                const total = subtotal + vat;
-
-                document.getElementById("subtotal").innerText = subtotal;
-                document.getElementById("vat").innerText = vat;
-                document.getElementById("total").innerText = total;
-            }
+            const ticket = document.getElementById(id);
+            ticket.value = increase ? parseInt(ticket.value) + 1 : ticket.value > 0 ? ticket.value - 1 : 0;
             calculate();
+        }
 
-        </script>
+        function calculate() {
+
+            const firstClassQty = document.getElementById("first-class").value;
+            const economyClassQty = document.getElementById("economy-class").value;
+
+            const subtotal = (firstClassQty * 150) + (economyClassQty * 100);
+            const vat = (subtotal / 100) * 10;
+            const total = subtotal + vat;
+
+            document.getElementById("subtotal").innerText = subtotal;
+            document.getElementById("vat").innerText = vat;
+            document.getElementById("total").innerText = total;
+        }
+        calculate();
+
+
+        document.getElementById("confirm").addEventListener("click", () => {
+
+            const firstClass = document.getElementById("departure").value;
+            const economyClass = document.getElementById("arrival").value;
+            const departureDate = document.getElementById("departure-date").value;
+            const returnDate = document.getElementById("return-date").value;
+
+            if (firstClass == '' && economyClass == '') {
+
+                alert("Please select Departure and Arrival");
+            } else if (departureDate == '' && returnDate == '') {
+
+                alert("Please select Departure date and return date");
+            } else {
+
+                confirm("Are you sure book ticket!");
+                document.getElementById("booking-area").style.display = 'none';
+                document.getElementById("thank-you").style.display = 'block';
+            }
+        })
+
+    </script>
 </body>
 
 </html>
